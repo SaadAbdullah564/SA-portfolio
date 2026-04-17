@@ -4,54 +4,6 @@
 */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Custom Cursor Logic
-    const cursor = document.getElementById('cursor');
-    const follower = document.getElementById('cursor-follower');
-    
-    let mouseX = 0;
-    let mouseY = 0;
-    let ballX = 0;
-    let ballY = 0;
-    
-    // Smooth custom cursor movement
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        
-        cursor.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
-    });
-
-    function animateFollower() {
-        // Linear interpolation for smoothness
-        const speed = 0.15;
-        ballX += (mouseX - ballX) * speed;
-        ballY += (mouseY - ballY) * speed;
-        
-        follower.style.transform = `translate3d(${ballX - 20}px, ${ballY - 20}px, 0)`;
-        
-        requestAnimationFrame(animateFollower);
-    }
-    animateFollower();
-
-    // Hover effect on interactable elements
-    const interactables = document.querySelectorAll('a, button, .project-card, .impact-card, .initiative-item');
-    
-    interactables.forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            cursor.style.transform += ' scale(2.5)';
-            cursor.style.backgroundColor = 'transparent';
-            cursor.style.border = '1px solid var(--accent)';
-            follower.style.opacity = '0';
-        });
-        
-        el.addEventListener('mouseleave', () => {
-            cursor.style.transform = cursor.style.transform.replace(' scale(2.5)', '');
-            cursor.style.backgroundColor = 'var(--accent)';
-            cursor.style.border = 'none';
-            follower.style.opacity = '1';
-        });
-    });
-
     // 2. Scroll Reveal Animation
     const revealElements = document.querySelectorAll('[data-reveal]');
     
